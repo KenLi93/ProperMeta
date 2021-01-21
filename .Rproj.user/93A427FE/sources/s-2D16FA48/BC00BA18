@@ -1,0 +1,25 @@
+{
+    "id": "BC00BA18",
+    "path": "E:/UW/Ken/ProperMeta/R/binomial.R",
+    "project_path": "R/binomial.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1611074450202.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "tempName": "Untitled1",
+        "cursorPosition": "32,0",
+        "scrollLine": "25"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1611191717,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1611191717159,
+    "read_only": false,
+    "read_only_alternatives": []
+}

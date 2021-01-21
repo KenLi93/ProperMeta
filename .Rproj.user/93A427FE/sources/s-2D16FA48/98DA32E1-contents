@@ -1,0 +1,21 @@
+## construct confidence intervals
+wald_cis <- function(EST, SE_HOM, SE_HET, alternative = "two.sided",
+                     conf.level = 0.95) {
+  alternative <- char.expand(alternative, c("two.sided", "less", "greater"))
+
+  alpha <- 1 - conf.level
+  if (alternative == "less") {
+    CI_HOM <- c(EST + qnorm(alpha) * SE_HOM, Inf)
+    CI_HET <- c(EST + qnorm(alpha) * SE_HET, Inf)
+  } else if (alternative == "greater") {
+    CI_HOM <- c(-Inf, EST + qnorm(conf.level) * SE_HOM)
+    CI_HET <- c(-Inf, EST + qnorm(conf.level) * SE_HET)
+  } else if (alternative == "two.sided") {
+    CI_HOM <- EST + qnorm(c(alpha / 2, 1 - alpha / 2)) * SE_HOM
+    CI_HET <- EST + qnorm(c(alpha / 2, 1 - alpha / 2)) * SE_HET
+  } else {
+    stop("'alternative' must be one of 'two.sided', 'less' or 'greater'")
+  }
+
+  return(list(CI_HOM = CI_HOM, CI_HET = CI_HET))
+}
