@@ -140,6 +140,26 @@ firth_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   nn <- sum(ni)
 
 
+
+  ## Compute the sandwich covariance matrix for the estimator -- the same as MLE
+  ## zero-cell correction for tables with zeroes -- necessary for variance calculation
+
+  any0 <- apply(data.frame(ai, bi, ci, di), 1, function(rr) any(rr == 0))
+  if (any(any0)) {
+    for (jj in 1:K) {
+      if (any0[jj]) {
+        ai[jj] <- ai[jj] + correction_factor * n1i[jj] / ni[jj]
+        bi[jj] <- bi[jj] + correction_factor * n1i[jj] / ni[jj]
+        ci[jj] <- ci[jj] + correction_factor * n2i[jj] / ni[jj]
+        di[jj] <- di[jj] + correction_factor * n2i[jj] / ni[jj]
+      }
+    }
+    n1i <- ai + bi
+    n2i <- ci + di
+    ni <- n1i + n2i
+    nn <- sum(nn)
+  }
+
   ## objective function of firth logistic regression -- penalized negative log likelihood
   objfunc <- function(param) {
     alpha <- param[1:K]
@@ -177,24 +197,6 @@ firth_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
 
   EST <- firth_est[K + 1]
 
-  ## Compute the sandwich covariance matrix for the estimator -- the same as MLE
-  ## zero-cell correction for tables with zeroes -- necessary for variance calculation
-  aa <- ai; bb <- bi; cc <- ci; dd <- di
-  any0 <- apply(data.frame(ai, bi, ci, di), 1, function(rr) any(rr == 0))
-  if (any(any0)) {
-    for (jj in 1:K) {
-      if (any0[jj]) {
-        aa[jj] <- ai[jj] + correction_factor * n1i[jj] / ni[jj]
-        bb[jj] <- bi[jj] + correction_factor * n1i[jj] / ni[jj]
-        cc[jj] <- ci[jj] + correction_factor * n2i[jj] / ni[jj]
-        dd[jj] <- di[jj] + correction_factor * n2i[jj] / ni[jj]
-      }
-    }
-    n1i <- aa + bb
-    n2i <- cc + dd
-    ni <- n1i + n2i
-    nn <- sum(nn)
-  }
 
   ## constants that help with the calculation
   gamma <- ni / nn
