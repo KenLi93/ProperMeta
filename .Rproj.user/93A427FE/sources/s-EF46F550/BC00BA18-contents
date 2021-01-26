@@ -64,7 +64,7 @@ overall_proportion <- function(xi, ni, alternative = "two.sided", conf.level = 0
   CI <- wald_ci(EST, SE, alternative = alternative, conf.level = conf.level)
 
   return(list(EST = EST, SE_HOM = SE_HOM, VAR_HOM = VAR_HOM, CI_HOM = CI_HOM,
-              SE_HET = SE, VAR = VAR, CI = CI))
+              SE = SE, VAR = VAR, CI = CI))
 
 }
 
@@ -110,5 +110,5 @@ pwa_proportion <- function(xi, ni, alternative = "two.sided", conf.level = 0.95,
 
 
   return(list(EST = EST, SE_NAIVE = SE_NAIVE, VAR_NAIVE = VAR_NAIVE, CI_NAIVE = CI_NAIVE,
-              SE= SE, VAR = VAR, CI = CI))
+              SE = SE, VAR = VAR, CI = CI))
 }
