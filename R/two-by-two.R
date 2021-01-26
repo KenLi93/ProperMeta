@@ -184,10 +184,10 @@ firth_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   if (any(any0)) {
     for (jj in 1:K) {
       if (any0[jj]) {
-        aa[jj] <- ai[jj] + correction_factor * n1i[jj] / N[jj]
-        bb[jj] <- bi[jj] + correction_factor * n1i[jj] / N[jj]
-        cc[jj] <- ci[jj] + correction_factor * n2i[jj] / N[jj]
-        dd[jj] <- di[jj] + correction_factor * n2i[jj] / N[jj]
+        aa[jj] <- ai[jj] + correction_factor * n1i[jj] / ni[jj]
+        bb[jj] <- bi[jj] + correction_factor * n1i[jj] / ni[jj]
+        cc[jj] <- ci[jj] + correction_factor * n2i[jj] / ni[jj]
+        dd[jj] <- di[jj] + correction_factor * n2i[jj] / ni[jj]
       }
     }
     n1i <- aa + bb
@@ -326,7 +326,7 @@ cmh_logor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 
 #'
 
 pwa_logor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.95,
-                correction_factor = 0.01, ...){
+                      correction_factor = 0.01, ...){
   test_2by2_tables(ai, n1i, ci, n2i)
   K <- length(ai) ## number of tables
 
@@ -387,8 +387,8 @@ pwa_logor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 
   ## common formula for estimated variance of inverse-variance weighted estimators
   ## allowing heterogeneity
   VAR <- (sum(1 / vv - 2 * theta * ww / vv ^ 3 + theta ^ 2 * zz / vv ^ 4) / sum(1 / vv) ^ 2 -
-    2 * sum(- ww / vv ^ 3 + theta * zz / vv ^ 4) * sum(theta / vv) / sum(1 / vv) ^ 3 +
-    sum(theta / vv) ^ 2 * sum(zz / vv ^ 4) / sum(1 / vv) ^ 4) / nn
+            2 * sum(- ww / vv ^ 3 + theta * zz / vv ^ 4) * sum(theta / vv) / sum(1 / vv) ^ 3 +
+            sum(theta / vv) ^ 2 * sum(zz / vv ^ 4) / sum(1 / vv) ^ 4) / nn
 
   SE <- sqrt(VAR)
 
@@ -421,7 +421,7 @@ pwa_logor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 
 
 ## inverse-variance weighted average risk difference, or Woolf's estimator
 pwa_rd <- function(X, alternative = "two.sided", conf.level = 0.95,
-                      correction_factor = 0.01, ...){
+                   correction_factor = 0.01, ...){
   test_2by2_tables(ai, n1i, ci, n2i)
   K <- length(ai) ## number of tables
 
@@ -489,8 +489,8 @@ pwa_rd <- function(X, alternative = "two.sided", conf.level = 0.95,
   ## common formula for estimated variance of inverse-variance weighted estimators
   ## allowing heterogeneity
   VAR <- (sum(1 / vv - 2 * theta * ww / vv ^ 3 + theta ^ 2 * zz / vv ^ 4) / sum(1 / vv) ^ 2 -
-                2 * sum(- ww / vv ^ 3 + theta * zz / vv ^ 4) * sum(theta / vv) / sum(1 / vv) ^ 3 +
-                sum(theta / vv) ^ 2 * sum(zz / vv ^ 4) / sum(1 / vv) ^ 4) / nn
+            2 * sum(- ww / vv ^ 3 + theta * zz / vv ^ 4) * sum(theta / vv) / sum(1 / vv) ^ 3 +
+            sum(theta / vv) ^ 2 * sum(zz / vv ^ 4) / sum(1 / vv) ^ 4) / nn
 
   SE <- sqrt(VAR)
 
@@ -517,7 +517,7 @@ pwa_rd <- function(X, alternative = "two.sided", conf.level = 0.95,
 #'
 
 pwa_lrr <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.95,
-                   correction_factor = 0.01, ...){
+                    correction_factor = 0.01, ...){
   test_2by2_tables(ai, n1i, ci, n2i)
   K <- length(ai) ## number of tables
 
@@ -581,8 +581,8 @@ pwa_lrr <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.
   ## common formula for estimated variance of inverse-variance weighted estimators
   ## allowing heterogeneity
   VAR <- (sum(1 / vv - 2 * theta * ww / vv ^ 3 + theta ^ 2 * zz / vv ^ 4) / sum(1 / vv) ^ 2 -
-                2 * sum(- ww / vv ^ 3 + theta * zz / vv ^ 4) * sum(theta / vv) / sum(1 / vv) ^ 3 +
-                sum(theta / vv) ^ 2 * sum(zz / vv ^ 4) / sum(1 / vv) ^ 4) / nn
+            2 * sum(- ww / vv ^ 3 + theta * zz / vv ^ 4) * sum(theta / vv) / sum(1 / vv) ^ 3 +
+            sum(theta / vv) ^ 2 * sum(zz / vv ^ 4) / sum(1 / vv) ^ 4) / nn
 
   SE <- sqrt(VAR)
 
