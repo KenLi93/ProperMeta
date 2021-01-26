@@ -1,6 +1,6 @@
 test_2by2_tables <- function(ai, n1i, ci, n2i) {
   ## test: if x and n are both numetic vectors
-  if ((!is.numeric(ai))|(!is.array(n1i))|(!is.numeric(ci))|(!is.array(n2i))) {
+  if ((!is.numeric(ai))|(!is.numeric(n1i))|(!is.numeric(ci))|(!is.numeric(n2i))) {
     stop("The arguments ai, n1i, ci, n2i should be numeric vectors.")
   }
 
