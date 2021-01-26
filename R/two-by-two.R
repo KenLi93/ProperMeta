@@ -126,7 +126,7 @@ mle_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
 ## Firth's mean-bias corrected logistic regression
 firth_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
                         alternative = "two.sided",
-                        conf_level = 0.95) {
+                        conf.level = 0.95) {
   test_2by2_tables(ai, n1i, ci, n2i)
   K <- length(ai) ## number of tables
 
