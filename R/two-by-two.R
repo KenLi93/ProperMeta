@@ -40,7 +40,7 @@ mle_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   di <- n2i - ci
 
   ## table totals
-  ni <- n1i + n0i
+  ni <- n1i + n2i
 
   ni <- sum(ni)
 
@@ -135,7 +135,7 @@ firth_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   di <- n2i - ci
 
   ## table totals
-  ni <- n1i + n0i
+  ni <- n1i + n2i
 
   nn <- sum(ni)
 
@@ -192,7 +192,7 @@ firth_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
     }
     n1i <- aa + bb
     n2i <- cc + dd
-    ni <- n1i + n0i
+    ni <- n1i + n2i
     nn <- sum(nn)
   }
 
@@ -269,7 +269,7 @@ cmh_logor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 
   di <- n2i - ci
 
   ## table totals
-  ni <- n1i + n0i
+  ni <- n1i + n2i
 
   nn <- sum(ni)
 
@@ -277,16 +277,18 @@ cmh_logor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 
   any0 <- apply(data.frame(ai, bi, ci, di), 1, function(rr) any(rr == 0))
 
   ## zero-cell correction for tables with zeroes
-  for (jj in 1:K) {
-    if (any0[jj]) {
-      ai[jj] <- ai[jj] + correction_factor * n1i[jj] / ni[jj]
-      bi[jj] <- bi[jj] + correction_factor * n1i[jj] / ni[jj]
-      ci[jj] <- ci[jj] + correction_factor * n2i[jj] / ni[jj]
-      di[jj] <- di[jj] + correction_factor * n2i[jj] / ni[jj]
+  if (any(any0)) {
+    for (jj in 1:K) {
+      if (any0[jj]) {
+        ai[jj] <- ai[jj] + correction_factor * n1i[jj] / ni[jj]
+        bi[jj] <- bi[jj] + correction_factor * n1i[jj] / ni[jj]
+        ci[jj] <- ci[jj] + correction_factor * n2i[jj] / ni[jj]
+        di[jj] <- di[jj] + correction_factor * n2i[jj] / ni[jj]
+      }
     }
+    ni <- n1i + n2i
+    nn <- sum(ni)
   }
-
-
   ## mantel-haenszel statistics
   CMH <- sum(ai * di / ni) / sum(bi * ci / ni)
   EST <- log(CMH)
@@ -333,7 +335,7 @@ pwa_logor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 
   di <- n2i - ci
 
   ## table totals
-  ni <- n1i + n0i
+  ni <- n1i + n2i
 
   nn <- sum(ni)
 
@@ -428,7 +430,7 @@ pwa_rd <- function(X, alternative = "two.sided", conf.level = 0.95,
   di <- n2i - ci
 
   ## table totals
-  ni <- n1i + n0i
+  ni <- n1i + n2i
 
   nn <- sum(ni)
 
@@ -524,7 +526,7 @@ pwa_lrr <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.
   di <- n2i - ci
 
   ## table totals
-  ni <- n1i + n0i
+  ni <- n1i + n2i
 
   nn <- sum(ni)
 
