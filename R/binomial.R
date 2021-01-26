@@ -86,7 +86,7 @@ pwa_proportion <- function(xi, ni, alternative = "two.sided", conf.level = 0.95,
   ## zero cell correction: adding a small number to the zero counts,
   ## subtracting a small number to the full counts
   xi[xi == 0] <- xi[xi == 0] + correction_factor
-  xi[xi == n] <- xi[xi == n] - correction_factor
+  xi[xi == ni] <- xi[xi == ni] - correction_factor
 
   ## quantities used in calculation
   pp <- xi / ni
@@ -99,7 +99,7 @@ pwa_proportion <- function(xi, ni, alternative = "two.sided", conf.level = 0.95,
   VAR_NAIVE <- EST * (1 - EST) / (nn - 1)
   SE_NAIVE <- sqrt(VAR_NAIVE)
 
-  VAR <- sum(gamma ^ 2 * pp * (1 - pp) / (n - 1))
+  VAR <- sum(gamma ^ 2 * pp * (1 - pp) / (ni - 1))
   SE <- sqrt(VAR)
 
 
