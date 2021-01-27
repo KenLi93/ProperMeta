@@ -90,6 +90,14 @@ mle_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   diag(U) <- c(ss + tt, sum(ss))
   U[K + 1, 1:K] <- U[1:K, K + 1] <- ss
 
+  ## avoid singular matrix
+  svd_J <- svd(J)
+
+  if (any(svd_J$d <= 1e-8)) {
+    svd_J$d[svd_J$d <= 1e-8] <- 1e-8
+    J <- svd_J$u %*% diag(svd_J$d) %*% t(svd_J$v)
+  }
+
   ## estimated variance of MLE under heterogeneity: sandwich estimator
   Omega_het <- solve(-J) %*% U %*% solve(-J)
 
@@ -223,6 +231,14 @@ firth_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   UU[K + 1, 1:K] <- UU[1:K, K + 1] <- ss
   diag(UU)[1:K] <- ss + tt
   UU[K + 1, K + 1] <- sum(ss)
+
+  ## avoid singular matrix
+  svd_JJ <- svd(JJ)
+
+  if (any(svd_JJ$d <= 1e-8)) {
+    svd_JJ$d[svd_JJ$d <= 1e-8] <- 1e-8
+    JJ <- svd_JJ$u %*% diag(svd_JJ$d) %*% t(svd_JJ$v)
+  }
 
   ## Fisher Information matrix
   vcov_hom <- solve(-JJ)
