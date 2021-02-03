@@ -29,7 +29,7 @@ test_2by2_tables <- function(ai, n1i, ci, n2i) {
 #'
 
 ## MLE of the common log odds ratio
-mle_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
+mle_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
                       alternative = "two.sided",
                       conf.level = 0.95) {
   test_2by2_tables(ai, n1i, ci, n2i)
@@ -132,7 +132,7 @@ mle_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
 #'
 
 ## Firth's mean-bias corrected logistic regression
-firth_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
+firth_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
                         alternative = "two.sided",
                         conf.level = 0.95) {
   test_2by2_tables(ai, n1i, ci, n2i)
@@ -277,7 +277,7 @@ firth_logor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
 
 
 ## Confidence interval of logarithm of Cochran-Mantel-Haenszel statistics with or without assuming homogeneity
-cmh_logor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.95,
+cmh_lor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.95,
                       correction_factor = 0.01, ...) {
   test_2by2_tables(ai, n1i, ci, n2i)
   K <- length(ai) ## number of tables
@@ -343,7 +343,7 @@ cmh_logor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 
 #' @export
 #'
 
-pwa_logor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.95,
+pwa_lor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.95,
                       correction_factor = 0.01, ...){
   test_2by2_tables(ai, n1i, ci, n2i)
   K <- length(ai) ## number of tables
