@@ -412,7 +412,7 @@ pwa_lor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.
 
   ## common formula for estimated variance of inverse-variance weighted estimators
   ## assuming homogeneity
-  VAR_NAIVE <- 1 / (NN * sum(1 / vv))
+  VAR_NAIVE <- 1 / (nn * sum(1 / vv))
 
   SE_NAIVE <- sqrt(VAR_HOM)
 
