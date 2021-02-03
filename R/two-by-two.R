@@ -414,7 +414,7 @@ pwa_lor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.
   ## assuming homogeneity
   VAR_NAIVE <- 1 / (nn * sum(1 / vv))
 
-  SE_NAIVE <- sqrt(VAR_HOM)
+  SE_NAIVE <- sqrt(VAR_NAIVE)
 
 
   ## construct confidence intervals
