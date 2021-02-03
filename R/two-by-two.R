@@ -438,7 +438,7 @@ pwa_logor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 
 #'
 
 ## inverse-variance weighted average risk difference, or Woolf's estimator
-pwa_rd <- function(X, alternative = "two.sided", conf.level = 0.95,
+pwa_rd <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.95,
                    correction_factor = 0.01, ...){
   test_2by2_tables(ai, n1i, ci, n2i)
   K <- length(ai) ## number of tables
@@ -485,7 +485,7 @@ pwa_rd <- function(X, alternative = "two.sided", conf.level = 0.95,
   theta <- p1 - p0
 
   ## unbiased variance estimate
-  vi <- p1 * (1 - p1) / (m1 - 1) + p0 * (1 - p0) / (m0 - 1)
+  vi <- p1 * (1 - p1) / (n1i - 1) + p0 * (1 - p0) / (n2i - 1)
 
   ## point estimate: inverse-variance weighted average risk difference
   EST <- sum(theta / vi) / sum(1 / vi)
