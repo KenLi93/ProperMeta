@@ -5,7 +5,10 @@
 \title{Inference for precision weighted average risk difference in meta-analysis of two-by-two tables}
 \usage{
 pwa_rd(
-  X,
+  ai,
+  n1i,
+  ci,
+  n2i,
   alternative = "two.sided",
   conf.level = 0.95,
   correction_factor = 0.01,
