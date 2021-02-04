@@ -42,7 +42,7 @@ mle_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   ## table totals
   ni <- n1i + n2i
 
-  ni <- sum(ni)
+  nn <- sum(ni)
 
   any0 <- apply(data.frame(ai, bi, ci, di), 1, function(rr) any(rr == 0))
 
@@ -73,6 +73,7 @@ mle_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   aa <- MLE[1:K]
   bb <- MLE[K + 1]
 
+  EST <- as.numeric(bb)
   ## make sandwich estimator of variance
   ## make matrix J.hat as in the document (negtive Fisher Information)
   uu <- - n1i * exp(aa + bb) / ((1 + exp(aa + bb)) ^ 2 * nn)
@@ -117,7 +118,7 @@ mle_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   CI_HOM <- wald_ci(EST, SE_HOM, alternative = alternative, conf.level = conf.level)
   CI <- wald_ci(EST, SE, alternative = alternative, conf.level = conf.level)
 
-  return(list(EST = bb, SE_HOM = SE_HOM,VAR_HOM = VAR_HOM, CI_HOM = CI_HOM,
+  return(list(EST = EST, SE_HOM = SE_HOM,VAR_HOM = VAR_HOM, CI_HOM = CI_HOM,
               SE = SE, VAR = VAR, CI = CI))
 }
 
