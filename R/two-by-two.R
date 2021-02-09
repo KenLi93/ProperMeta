@@ -214,8 +214,8 @@ firth_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   p1 <- ai / n1i
   p0 <- ci / n2i
 
-  alpha <- firth_est[1:K]
-  psi <- firth_est[K + 1]
+  alpha <- mle[1:K]
+  psi <- mle[K + 1]
 
   uu <- - gamma * delta * exp(alpha + psi) / (1 + exp(alpha + psi)) ^ 2
   vv <- - gamma * (1 - delta) * exp(alpha) / (1 + exp(alpha)) ^ 2
@@ -228,6 +228,7 @@ firth_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   JJ[K + 1, 1:K] <- JJ[1:K, K + 1] <- uu
   diag(JJ)[1:K] <- uu + vv
   JJ[K + 1, K + 1] <- sum(uu)
+  JJ <- -JJ
 
   UU[K + 1, 1:K] <- UU[1:K, K + 1] <- ss
   diag(UU)[1:K] <- ss + tt
@@ -242,7 +243,7 @@ firth_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
   }
 
   ## Fisher Information matrix
-  vcov_hom <- solve(-JJ)
+  vcov_hom <- solve(JJ)
 
   ## sandwich covariance matrix
   vcov_hw <- solve(JJ) %*% UU %*% solve(JJ)
