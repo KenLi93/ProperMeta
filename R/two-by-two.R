@@ -69,6 +69,7 @@ mle_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.1,
 
   MLE <- logit_mod$coefficients
 
+  MLE <- MLE * (abs(MLE) <= 20) + sign(MLE) * 20 * (abs(MLE) > 20)
   ## compute the asymptotic variance-covariance matrix of beta_hat
   aa <- MLE[1:K]
   bb <- MLE[K + 1]
@@ -201,6 +202,7 @@ firth_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.1,
   )
   mle <- logit_mod$coefficients
 
+  mle <- mle * (abs(mle) <= 20) + sign(mle) * 20 * (abs(mle) > 20)
   ## point estimates of Firth regression
   firth_est <- as.numeric(optim(mle, objfunc)$par)
 
