@@ -9,7 +9,7 @@ mle_lor(
   n1i,
   ci,
   n2i,
-  correction_factor = 0.01,
+  correction_factor = 0.1,
   alternative = "two.sided",
   conf.level = 0.95
 )

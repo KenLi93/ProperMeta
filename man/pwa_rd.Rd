@@ -11,7 +11,7 @@ pwa_rd(
   n2i,
   alternative = "two.sided",
   conf.level = 0.95,
-  correction_factor = 0.01,
+  correction_factor = 0.1,
   ...
 )
 }
