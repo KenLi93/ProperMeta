@@ -29,7 +29,7 @@ test_2by2_tables <- function(ai, n1i, ci, n2i) {
 #'
 
 ## MLE of the common log odds ratio
-mle_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
+mle_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.1,
                       alternative = "two.sided",
                       conf.level = 0.95) {
   test_2by2_tables(ai, n1i, ci, n2i)
@@ -133,7 +133,7 @@ mle_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
 #'
 
 ## Firth's mean-bias corrected logistic regression
-firth_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
+firth_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.1,
                         alternative = "two.sided",
                         conf.level = 0.95) {
   test_2by2_tables(ai, n1i, ci, n2i)
@@ -280,7 +280,7 @@ firth_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.01,
 
 ## Confidence interval of logarithm of Cochran-Mantel-Haenszel statistics with or without assuming homogeneity
 cmh_lor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.95,
-                      correction_factor = 0.01, ...) {
+                      correction_factor = 0.1, ...) {
   test_2by2_tables(ai, n1i, ci, n2i)
   K <- length(ai) ## number of tables
 
@@ -346,7 +346,7 @@ cmh_lor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.
 #'
 
 pwa_lor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.95,
-                      correction_factor = 0.01, ...){
+                      correction_factor = 0.1, ...){
   test_2by2_tables(ai, n1i, ci, n2i)
   K <- length(ai) ## number of tables
 
@@ -441,7 +441,7 @@ pwa_lor <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.
 
 ## inverse-variance weighted average risk difference, or Woolf's estimator
 pwa_rd <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.95,
-                   correction_factor = 0.01, ...){
+                   correction_factor = 0.1, ...){
   test_2by2_tables(ai, n1i, ci, n2i)
   K <- length(ai) ## number of tables
 
@@ -537,7 +537,7 @@ pwa_rd <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.9
 #'
 
 pwa_lrr <- function(ai, n1i, ci, n2i, alternative = "two.sided", conf.level = 0.95,
-                    correction_factor = 0.01, ...){
+                    correction_factor = 0.1, ...){
   test_2by2_tables(ai, n1i, ci, n2i)
   K <- length(ai) ## number of tables
 
