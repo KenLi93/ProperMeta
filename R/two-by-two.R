@@ -202,7 +202,13 @@ firth_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.1,
   )
   mle <- logit_mod$coefficients
 
-  mle <- mle * (abs(mle) <= 20) + sign(mle) * 20 * (abs(mle) > 20)
+  flag <- 0 ## indicate if the estimation is unstable
+
+  if (any(abs(mle) >= 20)) {
+    mle <- mle * (abs(mle) <= 20) + sign(mle) * 20 * (abs(mle) > 20)
+    flag <- 1
+  }
+
   ## point estimates of Firth regression
   firth_est <- as.numeric(optim(mle, objfunc)$par)
 
@@ -216,8 +222,13 @@ firth_lor <- function(ai, n1i, ci, n2i, correction_factor = 0.1,
   p1 <- ai / n1i
   p0 <- ci / n2i
 
-  alpha <- mle[1:K]
-  psi <- mle[K + 1]
+  if (flag) {
+    alpha <- firth_est[1:K]
+    psi <- firth_est[K + 1]
+  } else {
+    alpha <- mle[1:K]
+    psi <- mle[K + 1]
+  }
 
   uu <- - gamma * delta * exp(alpha + psi) / (1 + exp(alpha + psi)) ^ 2
   vv <- - gamma * (1 - delta) * exp(alpha) / (1 + exp(alpha)) ^ 2
